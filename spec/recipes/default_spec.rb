@@ -12,6 +12,7 @@ describe 'ark::default' do
     end
 
     let(:node) { chef_run.node }
+    let(:attribute) { node['ark'] }
 
     include_examples 'installs necessary packages'
 
@@ -24,28 +25,23 @@ describe 'ark::default' do
     end
 
     it "apache mirror" do
-      attribute = node['ark']['apache_mirror']
-      expect(attribute).to eq "http://apache.mirrors.tds.net"
+      expect(attribute['apache_mirror']).to eq "http://apache.mirrors.tds.net"
     end
 
     it "prefix root" do
-      attribute = node['ark']['prefix_root']
-      expect(attribute).to eq "/usr/local"
+      expect(attribute['prefix_root']).to eq "/usr/local"
     end
 
     it "prefix bin" do
-      attribute = node['ark']['prefix_bin']
-      expect(attribute).to eq "/usr/local/bin"
+      expect(attribute['prefix_bin']).to eq "/usr/local/bin"
     end
 
     it "prefix home" do
-      attribute = node['ark']['prefix_home']
-      expect(attribute).to eq "/usr/local"
+      expect(attribute['prefix_home']).to eq "/usr/local"
     end
 
     it "tar binary" do
-      attribute = node['ark']['tar']
-      expect(attribute).to eq "/bin/tar"
+      expect(attribute['tar']).to eq "/bin/tar"
     end
   end
 
