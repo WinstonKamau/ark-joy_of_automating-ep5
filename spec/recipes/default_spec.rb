@@ -1,6 +1,15 @@
 require 'spec_helper'
 
 describe 'ark::default' do
+
+  shared_examples 'installs necessary packages' do
+    it 'installs necessary packages' do
+      packages.each do |package_name|
+        expect(chef_run).to install_package(package_name)
+      end
+    end  
+  end
+
   context 'when no attributes are specified, on an unspecified platform' do
     let(:chef_run) do
       runner = ChefSpec::SoloRunner.new
@@ -11,11 +20,7 @@ describe 'ark::default' do
       %w[ libtool autoconf unzip rsync make gcc autogen ]
     end
 
-    it 'installs necessary packages' do
-      packages.each do |package_name|
-        expect(chef_run).to install_package(package_name)
-      end
-    end
+    include_examples 'installs necessary packages'
 
     it "does not install the gcc-c++ package" do
       expect(chef_run).not_to install_package("gcc-c++")
@@ -57,17 +62,11 @@ describe 'ark::default' do
       runner.converge(described_recipe)
     end
 
-    it 'installs necessary packages' do
-      expect(chef_run).to install_package('libtool')
-      expect(chef_run).to install_package('autoconf')
-      expect(chef_run).to install_package('unzip')
-      expect(chef_run).to install_package('rsync')
-      expect(chef_run).to install_package('make')
-      expect(chef_run).to install_package('gcc')
-      expect(chef_run).to install_package('xz-lzma-compat')
-      expect(chef_run).to install_package('bzip2')
-      expect(chef_run).to install_package('tar')
+    let(:packages) do
+      %w[ libtool autoconf unzip rsync make gcc xz-lzma-compat bzip2 tar ]
     end
+
+    include_examples 'installs necessary packages'
   end
 
   context 'when no attributes are specified, on Debian' do
