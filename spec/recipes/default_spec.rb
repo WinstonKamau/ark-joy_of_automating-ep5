@@ -8,9 +8,9 @@ describe 'ark::default' do
     end
 
     let(:packages) do
-      [ 'libtool', 'autoconf', 'unzip', 'rsync', 'make', 'gcc', 'autogen' ]
+      %w[ libtool autoconf unzip rsync make gcc autogen ]
     end
-    
+
     it 'installs necessary packages' do
       packages.each do |package_name|
         expect(chef_run).to install_package(package_name)
