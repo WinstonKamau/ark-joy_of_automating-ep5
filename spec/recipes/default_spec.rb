@@ -11,6 +11,8 @@ describe 'ark::default' do
       %w[ libtool autoconf unzip rsync make gcc autogen ]
     end
 
+    let(:node) { chef_run.node }
+
     include_examples 'installs necessary packages'
 
     it "does not install the gcc-c++ package" do
@@ -22,27 +24,27 @@ describe 'ark::default' do
     end
 
     it "apache mirror" do
-      attribute = chef_run.node['ark']['apache_mirror']
+      attribute = node['ark']['apache_mirror']
       expect(attribute).to eq "http://apache.mirrors.tds.net"
     end
 
     it "prefix root" do
-      attribute = chef_run.node['ark']['prefix_root']
+      attribute = node['ark']['prefix_root']
       expect(attribute).to eq "/usr/local"
     end
 
     it "prefix bin" do
-      attribute = chef_run.node['ark']['prefix_bin']
+      attribute = node['ark']['prefix_bin']
       expect(attribute).to eq "/usr/local/bin"
     end
 
     it "prefix home" do
-      attribute = chef_run.node['ark']['prefix_home']
+      attribute = node['ark']['prefix_home']
       expect(attribute).to eq "/usr/local"
     end
 
     it "tar binary" do
-      attribute = chef_run.node['ark']['tar']
+      attribute = node['ark']['tar']
       expect(attribute).to eq "/bin/tar"
     end
   end
