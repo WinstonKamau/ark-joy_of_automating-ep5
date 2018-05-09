@@ -7,9 +7,11 @@ describe 'ark::default' do
       runner.converge(described_recipe)
     end
 
+    let(:packages) do
+      [ 'libtool', 'autoconf', 'unzip', 'rsync', 'make', 'gcc', 'autogen' ]
+    end
+    
     it 'installs necessary packages' do
-      packages = [ 'libtool', 'autoconf', 'unzip', 'rsync', 'make', 'gcc', 'autogen' ]
-
       packages.each do |package_name|
         expect(chef_run).to install_package(package_name)
       end
