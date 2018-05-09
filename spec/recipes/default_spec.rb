@@ -4,10 +4,6 @@ describe 'ark::default' do
   context 'when no attributes are specified, on an unspecified platform' do
     include_context 'chef run'
     
-    let(:platform_details) do
-      {}
-    end
-
     let(:packages) do
       %w[ libtool autoconf unzip rsync make gcc autogen ]
     end

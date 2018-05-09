@@ -17,4 +17,6 @@ shared_context 'chef run' do
     runner = ChefSpec::SoloRunner.new(platform_details)
     runner.converge(described_recipe)
   end
+
+  let(:platform_details) {Hash.new}
 end
