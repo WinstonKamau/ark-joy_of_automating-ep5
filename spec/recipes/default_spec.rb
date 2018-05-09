@@ -2,9 +2,10 @@ require 'spec_helper'
 
 describe 'ark::default' do
   context 'when no attributes are specified, on an unspecified platform' do
-    let(:chef_run) do
-      runner = ChefSpec::SoloRunner.new
-      runner.converge(described_recipe)
+    include_context 'chef run'
+    
+    let(:platform_details) do
+      {}
     end
 
     let(:packages) do
@@ -46,9 +47,11 @@ describe 'ark::default' do
   end
 
   context 'when no attributes are specified, on Mac OSX' do
-    let(:chef_run) do
-      runner = ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.11.1')
-      runner.converge(described_recipe)
+
+    include_context 'chef run'
+
+    let(:platform_details) do
+      { platform: 'mac_os_x', version: '10.11.1'}
     end
 
     it 'installs necessary packages' do
