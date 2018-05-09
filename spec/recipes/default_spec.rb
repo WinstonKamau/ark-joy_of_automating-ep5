@@ -1,15 +1,6 @@
 require 'spec_helper'
 
 describe 'ark::default' do
-
-  shared_examples 'installs necessary packages' do
-    it 'installs necessary packages' do
-      packages.each do |package_name|
-        expect(chef_run).to install_package(package_name)
-      end
-    end  
-  end
-
   context 'when no attributes are specified, on an unspecified platform' do
     let(:chef_run) do
       runner = ChefSpec::SoloRunner.new
