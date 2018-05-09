@@ -19,4 +19,6 @@ shared_context 'chef run' do
   end
 
   let(:platform_details) {Hash.new}
+  let(:node) { chef_run.node }
+  let(:attribute) { node['ark'] }
 end

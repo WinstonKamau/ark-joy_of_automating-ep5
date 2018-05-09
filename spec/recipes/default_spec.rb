@@ -8,9 +8,6 @@ describe 'ark::default' do
       %w[ libtool autoconf unzip rsync make gcc autogen ]
     end
 
-    let(:node) { chef_run.node }
-    let(:attribute) { node['ark'] }
-
     include_examples 'installs necessary packages'
 
     it "does not install the gcc-c++ package" do
