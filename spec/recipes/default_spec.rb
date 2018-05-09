@@ -8,13 +8,11 @@ describe 'ark::default' do
     end
 
     it 'installs necessary packages' do
-      expect(chef_run).to install_package('libtool')
-      expect(chef_run).to install_package('autoconf')
-      expect(chef_run).to install_package('unzip')
-      expect(chef_run).to install_package('rsync')
-      expect(chef_run).to install_package('make')
-      expect(chef_run).to install_package('gcc')
-      expect(chef_run).to install_package('autogen')
+      packages = [ 'libtool', 'autoconf', 'unzip', 'rsync', 'make', 'gcc', 'autogen' ]
+
+      packages.each do |package_name|
+        expect(chef_run).to install_package(package_name)
+      end
     end
 
     it "does not install the gcc-c++ package" do
